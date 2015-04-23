@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html ng-app="toDo">
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>TODO APP</title>
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
+    <link rel="stylesheet"  href="stylesheet.css" />
+
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular-material/angular-material.js"></script>
+    <script src="bower_components/firebase/firebase.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.js"></script>
+    <script src="app.js"></script>
+</head>
+<body ng-controller="ListController as listCtrl">
+
+<h1>TO<span class="title">DO</span> LIST</h1>
+
+<div>
+
+    <div  ng-hide="listCtrl.list[0]" layout="column" layout-margin style="padding:25px;">
+        <p class="loading">Loading please wait!</p>
+        <div layout="row" layout-sm="column" layout-align="space-around">
+            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+        </div>
+    </div>
+
+    <ol>
+        <li ng-repeat="item in listCtrl.list" style="list-style: none">
+            <div class="item">
+            <md-checkbox  ng-model="item.isCompleted" ng-change="listCtrl.list.$save(item)" class="md-primary">
+            {{item.text}}
+            </div>
+        </li>
+        <li ng-show="listCtrl.listItem" style="list-style: none"><p>{{listCtrl.listItem}}</p></li>
+    </ol>
+
+    <md-input-container flex>
+        <label>Add Item</label>
+        <input ng-model="listCtrl.listItem" placeholder="Input an Item here.">
+    </md-input-container>
+
+    <md-button class="md-raised" ng-click="listCtrl.add()" ng-show="listCtrl.listItem">Add</md-button>
+    <!--<md-button class="md-raised md-primary" ng-show="listCtrl.list[0]" ng-model="listCtrl.list.item.isCompleted" ng-change="listCtrl.list.$remove(item)">Clear</md-button>-->
+    <md-button class="md-warn md-raised md-hue-2" ng-show="listCtrl.list[0]" ng-click="listCtrl.clearList()">Clear List</md-button>
+
+
+
+
+
+</div>
+
+
+
+
+
+</body>
+</html>

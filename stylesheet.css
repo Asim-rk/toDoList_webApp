@@ -1,0 +1,26 @@
+body {
+    width: 250px;
+    margin: auto;
+
+}
+
+.title {
+    color: cornflowerblue;
+}
+
+.loading {
+    color: lightgrey;
+}
+
+h1, p {
+    text-align: center;
+}
+
+ol {
+    padding: 0;
+}
+
+
+div.item {
+    border-left: 2px solid cornflowerblue;
+}
