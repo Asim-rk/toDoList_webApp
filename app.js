@@ -76,14 +76,14 @@ app.controller('ListController', function($scope, $firebaseArray){
     };
 
         this.clear = function(){
-            if(this.list[0]){
-                for (var item=0; item <this.list.length; item++) {
-                    if (this.list[item].isCompleted === true){
-                        this.list[item].isHide = true;
-                        this.list.$save(item);
-                    }
+
+            for (var item=0; item <this.list.length; item++) {
+                if (this.list[item].isCompleted === true){
+                    this.list[item].isHide = true;
+                    this.list.$save(item);
                 }
             }
+
         };
 
 
