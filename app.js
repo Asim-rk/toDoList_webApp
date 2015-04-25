@@ -68,17 +68,20 @@ app.controller('ListController', function($scope, $firebaseArray){
     // add text and isCompleted property as an object in the array of list on firebase.
     this.add = function(){
 
-
-        // adding the object into the array index (that is currently on in angular repeat)
-        this.list.$add({text: this.listItem, isCompleted: false, isHide: false});
-        this.listItem = undefined;
-        };
+        if(this.listItem) {
+            // adding the object into the array index (that is currently on in angular repeat)
+            this.list.$add({text: this.listItem, isCompleted: false, isHide: false});
+            this.listItem = undefined;
+        }
+    };
 
         this.clear = function(){
-            for (var item=0; item <this.list.length; item++) {
-                if (this.list[item].isCompleted === true){
-                    this.list[item].isHide = true;
-                    this.list[item].$save();
+            if(this.list[0]){
+                for (var item=0; item <this.list.length; item++) {
+                    if (this.list[item].isCompleted === true){
+                        this.list[item].isHide = true;
+                        this.list.$save(item);
+                    }
                 }
             }
         };
@@ -94,8 +97,8 @@ app.controller('ListController', function($scope, $firebaseArray){
         this.ref = new Firebase("https://tdo.firebaseio.com/todo-list"+ ++this.inc);
         this.list = $firebaseArray(this.ref);
 
-    };
 
+    };
 
     /*// clears the the object todo_list.
     this.clearList = function($rootScope){
