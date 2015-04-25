@@ -20,3 +20,4 @@ $RECYCLE.BIN/
 # WebStrome folder
 .idea/
 bower_components/
+node_modules/

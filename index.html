@@ -3,22 +3,24 @@
 <head lang="en">
     <meta charset="UTF-8">
     <title>TODO APP</title>
-    <link rel="stylesheet" href="bower_components/angular-material/angular-material.css" />
-    <link rel="stylesheet"  href="stylesheet.css" />
+    <link rel="stylesheet" href="bower_components/angular-material/angular-material.min.css" />
+    <link rel="stylesheet"  href="stylesheet.min.css" />
 
-    <script src="bower_components/angular/angular.js"></script>
-    <script src="bower_components/angular-animate/angular-animate.js"></script>
-    <script src="bower_components/angular-aria/angular-aria.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-animate/angular-animate.min.js"></script>
+    <script src="bower_components/angular-aria/angular-aria.min.js"></script>
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/firebase/firebase.js"></script>
-    <script src="bower_components/angularfire/dist/angularfire.js"></script>
-    <script src="app.js"></script>
+    <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
+    <!--<script src="check.min.js"></script>-->
+    <script src="app.min.js"></script>
+
 </head>
-<body ng-controller="ListController as listCtrl">
+<body>
 
 <h1>TO<span class="title">DO</span> LIST</h1>
 
-<div>
+<div ng-controller="ListController as listCtrl">
 
     <div  ng-hide="listCtrl.list[0]" layout="column" layout-margin style="padding:25px;">
         <p class="loading">Loading please wait!</p>
@@ -28,9 +30,9 @@
     </div>
 
     <ol>
-        <li ng-repeat="item in listCtrl.list" style="list-style: none">
+        <li ng-repeat="item in listCtrl.list | limitTo: 10 " style="list-style: none">
             <div class="item">
-            <md-checkbox  ng-model="item.isCompleted" ng-change="listCtrl.list.$save(item)" class="md-primary">
+            <md-checkbox  ng-model="item.isCompleted" ng-hide="item.isHide" ng-change="listCtrl.list.$save(item)" class="md-primary">
             {{item.text}}
             </div>
         </li>
@@ -42,9 +44,9 @@
         <input ng-model="listCtrl.listItem" placeholder="Input an Item here.">
     </md-input-container>
 
-    <md-button class="md-raised" ng-click="listCtrl.add()" ng-show="listCtrl.listItem">Add</md-button>
-    <!--<md-button class="md-raised md-primary" ng-show="listCtrl.list[0]" ng-model="listCtrl.list.item.isCompleted" ng-change="listCtrl.list.$remove(item)">Clear</md-button>-->
-    <md-button class="md-warn md-raised md-hue-2" ng-show="listCtrl.list[0]" ng-click="listCtrl.clearList()">Clear List</md-button>
+    <md-button class="md-raised" ng-click="listCtrl.add()" ng-show="listCtrl.listItem && listCtrl.list.length <= 9">Add</md-button>
+    <md-button class="md-raised md-primary" ng-show="listCtrl.list[0]" ng-click="listCtrl.clear()">Clear</md-button>
+    <md-button class="md-warn md-raised md-hue-2" ng-show="listCtrl.list.length >=1" ng-click="listCtrl.clearList()">Clear List</md-button>
 
 
 
