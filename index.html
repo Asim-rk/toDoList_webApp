@@ -20,8 +20,10 @@
 
 <h1>TO<span class="title">DO</span> LIST</h1>
 
+<!--List Controller ans listCtrl starts here-->
 <div ng-controller="ListController as listCtrl">
 
+    <!--the loading circle-->
     <div  ng-hide="listCtrl.list[0]" layout="column" layout-margin style="padding:25px;">
         <p class="loading">Loading please wait!</p>
         <div layout="row" layout-sm="column" layout-align="space-around">
@@ -29,6 +31,7 @@
         </div>
     </div>
 
+    <!--list item that repeates-->
     <ol>
         <li ng-repeat="item in listCtrl.list" style="list-style: none">
             <div class="item">
@@ -39,14 +42,23 @@
         <li style="list-style: none"><p>{{listCtrl.listItem}}</p></li>
     </ol><br /><br /><br />
 
+    <!--the material design angular input.-->
     <md-input-container flex>
         <label>Add Item</label>
         <input ng-model="listCtrl.listItem" placeholder="Input an Item here." maxlength="80">
     </md-input-container>
 
+    <!--the buttons-->
     <md-button class="md-raised" ng-click="listCtrl.add()">Add</md-button>
     <md-button class="md-raised md-primary" ng-click="listCtrl.clear()">Clear</md-button>
     <md-button class="md-warn md-raised md-hue-2" ng-click="listCtrl.clearList()">Clear List</md-button>
+
+        <md-button layout-align="left" ng-click="listCtrl.undo()">UNDO</md-button>
+
+
+
+
+
 
 </div>
 
