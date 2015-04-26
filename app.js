@@ -51,6 +51,7 @@ app.controller('ListController', function($scope, $firebaseArray) {
     this.unDoneRecords = new Firebase("https://tdo.firebaseio.com/unDoneRecords");
     // in unDoneRecords object make an array of unDoneValue.
     this.unDoneArray = $firebaseArray(this.unDoneRecords);
+    this.unDoneArray.unDoneValue = 0;
 
     // creates an object of name todo_list in the firebase server.
     this.ref = new Firebase("https://tdo.firebaseio.com/todo-list");

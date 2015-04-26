@@ -45,15 +45,14 @@
     <!--the material design angular input.-->
     <md-input-container flex>
         <label>Add Item</label>
-        <input ng-model="listCtrl.listItem" placeholder="Input an Item here." maxlength="80">
+        <input ng-model="listCtrl.listItem" placeholder="Input an Item here." maxlength="80" onkeydown="if (event.keyCode == 13) document.getElementById('btnAdd').click()" autofocus>
     </md-input-container>
 
     <!--the buttons-->
-    <md-button class="md-raised" ng-click="listCtrl.add()">Add</md-button>
+    <md-button id="btnAdd" class="md-raised" ng-click="listCtrl.add()">Add</md-button>
     <md-button class="md-raised md-primary" ng-click="listCtrl.clear()">Clear</md-button>
-    <md-button class="md-warn md-raised md-hue-2" ng-click="listCtrl.clearList()">Clear List</md-button>
-
-        <md-button layout-align="left" ng-click="listCtrl.undo()">UNDO</md-button>
+    <!--<md-button class="md-warn md-raised md-hue-2" ng-click="listCtrl.clearList()">Clear List</md-button>-->
+    <md-button layout-align="left" ng-click="listCtrl.undo()">UNDO</md-button>
 
 
 
