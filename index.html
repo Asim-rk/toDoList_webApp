@@ -13,6 +13,7 @@
     <script src="bower_components/firebase/firebase.js"></script>
     <script src="bower_components/angularfire/dist/angularfire.min.js"></script>
     <!--<script src="check.min.js"></script>-->
+    <script src="reviews.js"></script>
     <script src="app.js"></script>
 
 </head>
@@ -52,7 +53,7 @@
                         <!--the material design angular input.-->
                         <md-input-container flex>
                             <label>Add Item</label>
-                            <input ng-model="listCtrl.listItem" placeholder="Input an Item here." maxlength="80" onkeydown="if (event.keyCode == 13) document.getElementById('btnAdd').click()" autofocus>
+                            <input ng-model="listCtrl.listItem" placeholder="Input an Item here." maxlength="80" onkeydown="if (event.keyCode == 13) document.getElementById('btnAdd').click()" autofocus />
                         </md-input-container>
 
                         <!--the buttons-->
@@ -67,32 +68,36 @@
                 </md-content>
             </md-tab>
 
-            <md-tab label="review" >
-                <md-content class="md-padding" ng-controller="ReviewController as reviewCtrl">
+            <md-tab label="review">
+                <md-content class="md-padding">
                     <h1 class="md-display-2"><span class="title">RE</span>VIEWS</h1>
-                    <md-list>
-                        <md-list-item class="md-2-line" ng-repeat="item in reviewCtrl.review">
-                            <div class="md-list-item-text">
-                                <h4>{{item.who}}</h4>
-                                <p>{{item.star}}</p>
-                            </div>
-                            <md-divider md-inset ng-if="!$last"></md-divider>
-                        </md-list-item>
-                    </md-list>
+                    <div  ng-controller="reviewController as reviewCtrl">
+                        <md-list>
+                            <md-list-item class="md-3-line" ng-repeat="item in reviewCtrl.reviews | limitTo: 5 | orderBy: -item">
+                                <div class="md-list-item-text">
+                                    <h4>User Name: {{item.who}}</h4>
+                                    <p>Stars: {{item.stars}}</p>
+                                </div>
+                                <md-divider md-inset ng-if="!$last"></md-divider>
+                            </md-list-item>
+                        </md-list>
                         <div>
-                            <select ng-model="reviewCtrl.messages.star">
+                            <select ng-model="reviewCtrl.message.stars">
                                 <option value="1">1 Star</option>
                                 <option value="2">2 Stars</option>
                                 <option value="3">3 Stars</option>
                                 <option value="4">4 Stars</option>
                                 <option value="5">5 Stars</option>
                             </select>
-                            <input ng-model="reviewCtrl.messages.who" placeholder="User Name" maxlength="15" onkeydown="if (event.keyCode == 13) document.getElementById('userName').click()" autofocus>
+                            <md-input-container flex>
+                                <label>User Name</label>
+                                <input ng-model="reviewCtrl.message.who" placeholder="User Name" maxlength="15" onkeydown="if (event.keyCode == 13) document.getElementById('userName').click()" autofocus />
+                            </md-input-container>
                         </div>
                         <div class="buttons">
-                            <md-button id="userName" class="md-raised" ng-click="reviewCtrl.add()">Add</md-button>
+                            <md-button id="userName" class="md-raised" ng-click="reviewCtrl.post()">Add</md-button>
                         </div>
-
+                    </div>
                 </md-content>
             </md-tab>
 
