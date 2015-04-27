@@ -89,21 +89,25 @@ app.controller('ListController', function($scope, $firebaseArray) {
         }
     };
 
+    // hide the selected index of the array.
     this.clear = function () {
 
         for (var item = 0; item < this.list.length; item++) {
+            debugger;
             if (this.list[item].isCompleted === true) {
                 this.list[item].isHide = true;
                 this.list[item].unDoneValue ++;
                 this.list.$save(item);
-
             }
+            /*if(this.list[item].unDoneValue === 1){
+                this.index = item;
+            }*/
         }
 
     };
 
 
-    // create a new list object on firebase.
+    /*// create a new list object on firebase.
     this.clearList = function () {
 
         // creating the property to check werther to go on to the next list.
@@ -118,17 +122,45 @@ app.controller('ListController', function($scope, $firebaseArray) {
         this.unDoneArray.$save(0);
 
 
-    };
+    };*/
 
+    // un hide the hidden index of the array.
     this.undo = function () {
-        var lowest = 0;
+
+        /*var lowest = this.list[this.index].unDoneValue;
+
+        for(var i=0; i<this.list.length; i++){
+            debugger;
+            if(this.list[i].unDoneValue < lowest && this.list[i].unDoneValue !=0){
+                lowest = this.list[i].unDoneValue;
+                this.list.$save(i);
+            }
+        }*/
+
         for (var i = 0; i < this.list.length; i++) {
-            for (var j = 0; j < this.list.length; j++) {
-                if ((this.list[j].unDoneValue <= this.list[i].unDoneValue) && this.list[j].isHide == true) {
+            debugger;
+            if (this.list[i].unDoneValue === 1) {
+                this.list[i].isHide = false;
+                this.list[i].unDoneValue = this.unDoneArray[0].unDoneValue;
+                this.list.$save(i);
+            } else if(this.list[i].unDoneValue != 0){
+                this.list[i].unDoneValue --;
+                this.list.$save(i);
+
+            }
+        }
+
+        /*var lowest = 1;
+        for (var i = 0; i < this.list.length; i++) {
+
+            for (var j = i+1; j < this.list.length; j++) {
+                debugger;
+                if((this.list[i].unDoneValue < this.list[j].unDoneValue) && this.list[j].isHide == true) {
                     lowest = this.list[i].unDoneValue;
                 }
 
             }
+
         }
         for (var i = 0; i < this.list.length; i++) {
 
@@ -137,7 +169,8 @@ app.controller('ListController', function($scope, $firebaseArray) {
                 this.list[i].unDoneValue = this.unDoneArray[0].unDoneValue;
                 this.list.$save(i);
             }
-        }
+        }*/
+
     };
 
 

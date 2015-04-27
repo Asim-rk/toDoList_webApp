@@ -18,47 +18,67 @@
 </head>
 <body>
 
-<h1>TO<span class="title">DO</span> LIST</h1>
 
-<!--List Controller ans listCtrl starts here-->
-<div ng-controller="ListController as listCtrl">
+<div>
+    <md-content class="md-padding">
+        <md-tabs md-dynamic-height md-border-bottom>
+            <md-tab label="main">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2">TO<span class="title">DO</span> LIST</h1>
 
-    <!--the loading circle-->
-    <div  ng-hide="listCtrl.list[0]" layout="column" layout-margin style="padding:25px;">
-        <p class="loading">Loading please wait!</p>
-        <div layout="row" layout-sm="column" layout-align="space-around">
-            <md-progress-circular md-mode="indeterminate"></md-progress-circular>
-        </div>
-    </div>
+                    <!--List Controller ans listCtrl starts here-->
+                    <div ng-controller="ListController as listCtrl">
 
-    <!--list item that repeates-->
-    <ol>
-        <li ng-repeat="item in listCtrl.list" style="list-style: none">
-            <div class="item">
-            <md-checkbox  ng-model="item.isCompleted" ng-hide="item.isHide" ng-change="listCtrl.list.$save(item)" class="md-primary">
-            {{item.text}}
-            </div>
-        </li>
-        <li style="list-style: none"><p>{{listCtrl.listItem}}</p></li>
-    </ol><br /><br /><br />
+                        <!--the loading circle-->
+                        <div  ng-hide="listCtrl.list[0]" layout="column" layout-margin style="padding:25px;">
+                            <p class="loading">Loading please wait!</p>
+                            <div layout="row" layout-sm="column" layout-align="space-around">
+                                <md-progress-circular md-mode="indeterminate"></md-progress-circular>
+                            </div>
+                        </div>
 
-    <!--the material design angular input.-->
-    <md-input-container flex>
-        <label>Add Item</label>
-        <input ng-model="listCtrl.listItem" placeholder="Input an Item here." maxlength="80" onkeydown="if (event.keyCode == 13) document.getElementById('btnAdd').click()" autofocus>
-    </md-input-container>
+                        <!--list item that repeates-->
+                        <ol>
+                            <li ng-repeat="item in listCtrl.list" style="list-style: none">
+                                <div class="item">
+                                    <md-checkbox  ng-model="item.isCompleted" ng-hide="item.isHide" ng-change="listCtrl.list.$save(item)" class="md-primary">
+                                        {{item.text}}
+                                </div>
+                            </li>
+                            <li style="list-style: none"><p>{{listCtrl.listItem}}</p></li>
+                        </ol><br /><br /><br />
 
-    <!--the buttons-->
-    <md-button id="btnAdd" class="md-raised" ng-click="listCtrl.add()">Add</md-button>
-    <md-button class="md-raised md-primary" ng-click="listCtrl.clear()">Clear</md-button>
-    <!--<md-button class="md-warn md-raised md-hue-2" ng-click="listCtrl.clearList()">Clear List</md-button>-->
-    <md-button layout-align="left" ng-click="listCtrl.undo()">UNDO</md-button>
+                        <!--the material design angular input.-->
+                        <md-input-container flex>
+                            <label>Add Item</label>
+                            <input ng-model="listCtrl.listItem" placeholder="Input an Item here." maxlength="80" onkeydown="if (event.keyCode == 13) document.getElementById('btnAdd').click()" autofocus>
+                        </md-input-container>
 
+                        <!--the buttons-->
+                        <div class="buttons">
+                            <md-button id="btnAdd" class="md-raised" ng-click="listCtrl.add()">Add</md-button>
+                            <md-button class="md-raised md-warn" ng-click="listCtrl.clear()">Clear</md-button>
+                            <!--<md-button class="md-warn md-raised md-hue-2" ng-click="listCtrl.clearList()">Clear List</md-button>-->
+                            <md-button class="md-raised md-primary"  ng-click="listCtrl.undo()">UNDO</md-button>
+                        </div>
+                    </div>
 
-
-
-
-
+                </md-content>
+            </md-tab>
+            <md-tab label="review">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2"><span class="title">RE</span>VIEW</h1>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum </p>
+                </md-content>
+            </md-tab>
+            <md-tab label="about">
+                <md-content class="md-padding">
+                    <h1 class="md-display-2">Tab Three</h1>
+                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                </md-content>
+            </md-tab>
+        </md-tabs>
+    </md-content>
 </div>
 
 </body>

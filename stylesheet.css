@@ -1,6 +1,6 @@
 
 body {
-    width: 300px;
+    width: 315px;
     margin: auto;
 
 }
@@ -24,4 +24,8 @@ ol {
 
 div.item {
     border-left: 2px solid cornflowerblue;
+}
+
+div.buttons {
+    text-align: center;
 }
