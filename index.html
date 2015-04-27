@@ -22,6 +22,7 @@
 <div>
     <md-content class="md-padding">
         <md-tabs md-dynamic-height md-border-bottom>
+
             <md-tab label="main">
                 <md-content class="md-padding">
                     <h1 class="md-display-2">TO<span class="title">DO</span> LIST</h1>
@@ -65,16 +66,45 @@
 
                 </md-content>
             </md-tab>
-            <md-tab label="review">
-                <md-content class="md-padding">
-                    <h1 class="md-display-2"><span class="title">RE</span>VIEW</h1>
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla venenatis ante augue. Phasellus volutpat neque ac dui mattis vulputate. Etiam consequat aliquam cursus. In sodales pretium ultrices. Maecenas lectus est, sollicitudin consectetur felis nec, feugiat ultricies mi. Aliquam erat volutpat. Nam placerat, tortor in ultrices porttitor, orci enim rutrum </p>
+
+            <md-tab label="review" >
+                <md-content class="md-padding" ng-controller="ReviewController as reviewCtrl">
+                    <h1 class="md-display-2"><span class="title">RE</span>VIEWS</h1>
+                    <md-list>
+                        <md-list-item class="md-2-line" ng-repeat="item in reviewCtrl.review">
+                            <div class="md-list-item-text">
+                                <h4>{{item.who}}</h4>
+                                <p>{{item.star}}</p>
+                            </div>
+                            <md-divider md-inset ng-if="!$last"></md-divider>
+                        </md-list-item>
+                    </md-list>
+                        <div>
+                            <select ng-model="reviewCtrl.messages.star">
+                                <option value="1">1 Star</option>
+                                <option value="2">2 Stars</option>
+                                <option value="3">3 Stars</option>
+                                <option value="4">4 Stars</option>
+                                <option value="5">5 Stars</option>
+                            </select>
+                            <input ng-model="reviewCtrl.messages.who" placeholder="User Name" maxlength="15" onkeydown="if (event.keyCode == 13) document.getElementById('userName').click()" autofocus>
+                        </div>
+                        <div class="buttons">
+                            <md-button id="userName" class="md-raised" ng-click="reviewCtrl.add()">Add</md-button>
+                        </div>
+
                 </md-content>
             </md-tab>
+
             <md-tab label="about">
                 <md-content class="md-padding">
-                    <h1 class="md-display-2">Tab Three</h1>
-                    <p>Integer turpis erat, porttitor vitae mi faucibus, laoreet interdum tellus. Curabitur posuere molestie dictum. Morbi eget congue risus, quis rhoncus quam. Suspendisse vitae hendrerit erat, at posuere mi. Cras eu fermentum nunc. Sed id ante eu orci commodo volutpat non ac est. Praesent ligula diam, congue eu enim scelerisque, finibus commodo lectus.</p>
+                    <p><img src="images/asim.jpg" title="Asim Raza Khan"/></p>
+                    <!--<h1 class="md-display-2">ASIM</h1>
+                    <p>
+                        <a href="https://github.com/Asim-rk" target="_blank">GitHub</a><br />
+                        <a href="https://www.facebook.com/asim.r.k" target="_blank">Facebook</a><br />
+                        <a href="https://pk.linkedin.com/pub/asim-raza-khan/91/299/362" target="_blank">LinkedIn</a>
+                    </p>-->
                 </md-content>
             </md-tab>
         </md-tabs>

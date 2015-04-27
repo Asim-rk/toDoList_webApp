@@ -29,3 +29,12 @@ div.item {
 div.buttons {
     text-align: center;
 }
+
+p img {
+    border-radius: 100px;
+}
+
+p h1{
+    font-size: 20%;
+
+}

@@ -3,47 +3,7 @@
  */
 
 
-var app = angular.module('toDo', ['ngMaterial', 'firebase']);
-
-    /*app.factory("severCheck", function($rootScope, $firebaseArray) {
-
-        // creates an object of name todo_list in the firebase server.
-        $rootScope.ref = new Firebase("https://tdo.firebaseio.com/todo-list0");
-        $rootScope.inc = 0;
-
-        // creates an array of name list the the todo_list object.
-        $rootScope.list = $firebaseArray($rootScope.ref);
-
-        while ($rootScope.list.isCleared = true) {
-            $rootScope.inc++;
-            $rootScope.ref = new Firebase("https://tdo.firebaseio.com/todo-list" + $rootScope.inc);
-        }
-
-
-        // this uses AngularFire to create the synchronized array
-        return $firebaseArray($rootScope.ref);
-    });*/
-
-/*app.factory('objectCheck', function(){
-
-    // creates an object of name todo_list in the firebase server.
-    this.ref = new Firebase("https://tdo.firebaseio.com/todo-list0");
-    this.inc = 0;
-
-    // creates an array of name list the the todo_list object.
-    this.list = $firebaseArray(this.ref);
-
-    while (this.list.isCleared = true) {
-        this.inc++;
-        this.ref = new Firebase("https://tdo.firebaseio.com/todo-list" + this.inc);
-    }
-
-
-    // this uses AngularFire to create the synchronized array
-    return $firebaseArray(this.ref);
-});*/
-
-
+var app = angular.module('toDo', ['reviews', 'ngMaterial', 'firebase']);
 app.controller('ListController', function($scope, $firebaseArray) {
 
 
@@ -187,6 +147,28 @@ app.controller('ListController', function($scope, $firebaseArray) {
 
 });
 
+var reviews = angular.module('reviews', ['ngMaterial']);
+    reviews.controller('ReviewController', function() {
+        this.review = new Firebase("https://tdo.firebaseio.com/reviews");
+        this.reviews = $firebaseArray(this.review);
+
+        this.messages = undefined;
+
+        this.add = function () {
+
+            if (this.messages) {
+
+                // adding the object into the array index (that is currently on in angular repeat)
+                this.reviews.$add(this.messages);
+                this.messages = undefined;
+            }
+        };
+
+        this.messages = {
+            who: 'Asim',
+            star: 5
+        };
+    });
 
 
 
