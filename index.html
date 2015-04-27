@@ -89,12 +89,12 @@
                             <md-list-item class="md-3-line" ng-repeat="item in reviewCtrl.reviews | limitTo: 3">
 
                                 <div class="md-list-item-text">
-                                    <h4 class="ng-binding">
+                                    <h4 class="ng-binding" style="margin-top: 10px;  margin-bottom: 0">
                                         <img src="images/cat.jpg" style="border-radius: 100%" class="face" alt="{{item.who}}">
                                         {{item.who}}
                                     </h4>
-                                    <h5>{{item.stars}} Stars.</h5>
-                                    <h5>Suggestion: {{item.suggestion}}</h5><br />
+                                    <h5 style="margin: 0">{{item.stars}} Stars.</h5>
+                                    <h5 style="margin: 0">Suggestion: {{item.suggestion}}</h5><br />
                                 </div>
                                 <md-divider md-inset ng-if="!$last"></md-divider>
                             </md-list-item>
@@ -132,7 +132,7 @@
 
             <md-tab label="about">
                 <md-content class="md-padding">
-                    <p><img src="images/asim.jpg" title="Asim Raza Khan"/></p>
+                    <p><img src="images/asim.jpg" title="Asim Raza Khan" style="border-radius: 100%"/></p>
                     <!--<h1 class="md-display-2">ASIM</h1>
                     <p>
                         <a href="https://github.com/Asim-rk" target="_blank">GitHub</a><br />

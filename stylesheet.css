@@ -38,12 +38,3 @@ p h1{
     font-size: 20%;
 
 }
-
-div.md-list-item-text h4 {
-    margin-top: 10px;
-    margin-bottom: 0;
-}
-
-div.md-list-item-text h5 {
-    margin: 0;
-}

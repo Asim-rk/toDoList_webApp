@@ -161,7 +161,7 @@
 
             this.post = function () {
 
-                if (this.message) {
+                if (this.message.who && this.message.suggestion) {
 
                     // adding the object into the array index (that is currently on in angular repeat)
                     this.reviews.$add(this.message);
