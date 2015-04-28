@@ -61,7 +61,7 @@
                             <md-button id="btnAdd" class="md-raised" ng-click="listCtrl.add()">Add</md-button>
                             <md-button class="md-raised md-warn" ng-click="listCtrl.clear()">Clear</md-button>
                             <!--<md-button class="md-warn md-raised md-hue-2" ng-click="listCtrl.clearList()">Clear List</md-button>-->
-                            <md-button class="md-raised md-primary"  ng-click="listCtrl.undo()">UNDO</md-button>
+                            <md-button class="md-raised md-primary"  ng-click="listCtrl.undo()">Undo</md-button>
                         </div>
                     </div>
 
@@ -86,7 +86,7 @@
 
                         <!--repeating an array-->
                         <md-list>
-                            <md-list-item class="md-3-line" ng-repeat="item in reviewCtrl.reviews | limitTo: 3">
+                            <md-list-item class="md-3-line" ng-repeat="item in reviewCtrl.reviews">
 
                                 <div class="md-list-item-text">
                                     <h4 class="ng-binding" style="margin-top: 10px;  margin-bottom: 0">
@@ -94,7 +94,7 @@
                                         {{item.who}}
                                     </h4>
                                     <h5 style="margin: 0">{{item.stars}} Stars.</h5>
-                                    <h5 style="margin: 0">Suggestion: {{item.suggestion}}</h5><br />
+                                    <!--<h5 style="margin: 0">Suggestion: {{item.suggestion}}</h5><br />-->
                                 </div>
                                 <md-divider md-inset ng-if="!$last"></md-divider>
                             </md-list-item>
@@ -114,17 +114,17 @@
                             <!--input feilds-->
                             <md-input-container flex>
                                 <label>User Name</label>
-                                <input ng-model="reviewCtrl.message.who" placeholder="User Name" maxlength="15"  autofocus />
+                                <input ng-model="reviewCtrl.message.who" placeholder="User Name" maxlength="15"  onkeydown="if (event.keyCode == 13) document.getElementById('userName').click()" />
                               </md-input-container>
-                            <md-input-container flex>
+                            <!--<md-input-container flex>
                                 <label>Suggestion</label>
                                 <input ng-model="reviewCtrl.message.suggestion" placeholder="Suggestion" maxlength="15" onkeydown="if (event.keyCode == 13) document.getElementById('userName').click()" />
-                            </md-input-container>
+                            </md-input-container>-->
                         </div>
 
                         <!--button-->
                         <div class="buttons">
-                            <md-button id="userName" class="md-raised" ng-click="reviewCtrl.post()">Add</md-button>
+                            <md-button id="userName" class="md-raised md-primary" ng-click="reviewCtrl.post()">Submit</md-button>
                         </div>
                     </div>
                 </md-content>
@@ -133,12 +133,12 @@
             <md-tab label="about">
                 <md-content class="md-padding">
                     <p><img src="images/asim.jpg" title="Asim Raza Khan" style="border-radius: 100%"/></p>
-                    <!--<h1 class="md-display-2">ASIM</h1>
-                    <p>
-                        <a href="https://github.com/Asim-rk" target="_blank">GitHub</a><br />
-                        <a href="https://www.facebook.com/asim.r.k" target="_blank">Facebook</a><br />
-                        <a href="https://pk.linkedin.com/pub/asim-raza-khan/91/299/362" target="_blank">LinkedIn</a>
-                    </p>-->
+                    <h1 class="md-display-2 name">A<span class="title">sim</span>.R.K</h1>
+                    <p class="links">
+                        <img class="social" src="images/git.gif" title="GitHub" /><a href="https://github.com/Asim-rk" target="_blank">GitHub</a><br />
+                        <img class="social" src="images/fb.gif" title="facebook" /><a href="https://www.facebook.com/asim.r.k" target="_blank">Facebook</a><br />
+                        <img class="social" src="images/li.gif" title="Linkdin" /><a href="https://pk.linkedin.com/pub/asim-raza-khan/91/299/362" target="_blank">LinkedIn</a>
+                    </p>
                 </md-content>
             </md-tab>
         </md-tabs>

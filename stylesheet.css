@@ -6,7 +6,7 @@ body {
 }
 
 .title {
-    color: cornflowerblue;
+    color: rgb(57,73,171);
 }
 
 .loading {
@@ -37,4 +37,42 @@ p img {
 p h1{
     font-size: 20%;
 
+}
+
+h1 {
+    font-family: Calibri;
+    font-size: 35px;
+}
+
+p.links {
+    text-align: left;
+}
+
+p a {
+    text-decoration: none;
+    color: rgb(57,73,171);
+}
+
+p a:link {
+    color: rgb(57,73,171);
+}
+
+p a:hover {
+    rgb(255,64,129);
+    font-weight: bolder;
+}
+
+p a:visited {
+    rgba(0,0,0,0.54);
+}
+
+p a:active {
+    rgb(255,64,129);
+}
+
+p img.social {
+    border-radius: 15px;
+    vertical-align: middle;
+    width: 50px;
+    padding: 10px;
 }
