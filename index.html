@@ -49,7 +49,7 @@
                                         {{item.text}}
                                     </md-checkbox>
                                     <p ng-show="item.isEditing">
-                                        <input type="text" ng-model="item.text" ng-enter="listCtrl.edited(item)" />
+                                        <input type="text" ng-model="item.text" ng-enter="listCtrl.edited(item)" maxlength="80" />
                                     </p>
                                 </div>
                             </li>
