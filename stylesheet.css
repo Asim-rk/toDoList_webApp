@@ -17,7 +17,8 @@ h1, p {
     text-align: center;
 }
 
-ol {
+ul {
+    list-style: none;
     padding: 0;
 }
 
@@ -29,6 +30,11 @@ div.item {
 div.buttons {
     text-align: center;
 }
+
+/*div p.reviews {
+    text-align: left;
+    margin: 0;
+}*/
 
 p img {
     border-radius: 100px;
@@ -45,7 +51,7 @@ h1 {
 }
 
 p.links {
-    text-align: left;
+    text-align: center;
 }
 
 p a {
@@ -75,4 +81,10 @@ p img.social {
     vertical-align: middle;
     width: 50px;
     padding: 10px;
+}
+
+input[type="text"] {
+    width: 250px;
+    padding-left: 2px;
+    height: 30px;
 }

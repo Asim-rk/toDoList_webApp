@@ -4,6 +4,21 @@
 
 (function(){
     var app = angular.module('toDo', ['reviewModule', 'ngMaterial', 'firebase']);
+
+    app.directive('ngEnter', function() {
+        return function(scope, element, attrs) {
+            element.bind("keydown keypress", function(event) {
+                if(event.which === 13) {
+                    scope.$apply(function(){
+                        scope.$eval(attrs.ngEnter, {'event': event});
+                    });
+
+                    event.preventDefault();
+                }
+            });
+        };
+    });
+
     app.controller('ListController', function($scope, $firebaseArray) {
 
 
@@ -30,7 +45,23 @@
 
         // creates an array of name list the the todo_list object.
         this.list = $firebaseArray(this.ref);
+
+        // loop that checks the isEditing property and set it to false and shows the list item.
+        this.check = function(){
+            for (var item = 0; item < this.list.length; item++) {
+                if (this.list[item].isEditing == true) {
+                    console.log("is true");
+                    this.list[item].isEditing = false;
+                    this.list[item].isHide = false;
+                    this.list.$save(item);
+                }
+            }
+        };
+
+
+
         this.listItem = undefined;
+        this.editText = undefined;
 
 
         // add text and isCompleted property as an object in the array of list on firebase.
@@ -43,10 +74,37 @@
                     text: this.listItem,
                     isCompleted: false,
                     isHide: false,
+                    isEditing: false,
                     unDoneValue: this.unDoneArray[0].unDoneValue
                 });
                 this.listItem = undefined;
             }
+        };
+
+
+        // editing the particular item on the list
+        this.editing = function(item){
+            this.editText = item.text;
+            item.isEditing = true;
+            item.isHide = true;
+            /*this.editText = item.text;*/
+            this.list.$save(item);
+        };
+
+
+        // edited the particular item on the list
+        this.edited = function(item){
+            if(item.text) {
+                item.isEditing = false;
+                item.isHide = false;
+                this.list.$save(item);
+            }else {
+                item.isEditing = false;
+                item.isHide = false;
+                item.text = this.editText;
+                this.list.$save(item);
+            }
+
         };
 
         // hide the selected index of the array.
@@ -161,7 +219,7 @@
 
             this.post = function () {
 
-                if (this.message.who) {
+                if (this.message.who && this.message.suggestion) {
 
                     // adding the object into the array index (that is currently on in angular repeat)
                     this.reviews.$add(this.message);
@@ -174,17 +232,3 @@
 
         });
 }) ();
-
-
-
-
-
-
-
-
-
-
-
-
-
-
