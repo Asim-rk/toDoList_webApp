@@ -26,7 +26,7 @@
         this.unDoneRecords = new Firebase("https://tdo.firebaseio.com/unDoneRecords");
         // in unDoneRecords object make an array of unDoneValue.
         this.unDoneArray = $firebaseArray(this.unDoneRecords);
-        this.unDoneArray.unDoneValue = 0;
+        /*this.unDoneArray.$add({unDoneValue: 0});*/
 
         // creates an object of name todo_list in the firebase server.
         this.ref = new Firebase("https://tdo.firebaseio.com/todo-list");
@@ -35,6 +35,8 @@
         this.name = "todo-list";
         this.inc = 0;
 
+        // one time one item.
+        /*this.editingItems = 0;*/
 
         /*this.pageLd = function(){
          if (ref == undefined){
@@ -57,7 +59,6 @@
                 }
             }
         };
-
 
 
         this.listItem = undefined;
@@ -83,17 +84,41 @@
 
 
         // editing the particular item on the list
-        this.editing = function(item){
-            this.editText = item.text;
+        this.editing = function(item) {
+            this.originalText = item.text;
             item.isEditing = true;
             item.isHide = true;
-            /*this.editText = item.text;*/
             this.list.$save(item);
+            /*this.editingItems = 1;*/
+
+            /*if(this.editingItems = 1){
+                // to close all open editing items
+                for (var item = 0; item < this.list.length; item++) {
+                    if (this.list[item].isEditing == true)
+                        this.list[item].isEditing = false;
+                    this.list[item].isHide = false;
+                    this.list.$save(item);
+                }
+                this.editingItems = 0;
+
+            }else if(this.editingItems == 0){
+                this.allClosed();
+            }*/
         };
+
+        /*// to be called if all editing item is closed
+        this.allClosed = function(item){
+            this.isEditing = item.text;
+            item.isEditing = true;
+            item.isHide = true;
+            this.list.$save(item);
+            this.editingItems = 1;
+        };*/
 
 
         // edited the particular item on the list
         this.edited = function(item){
+            /*this.editingItems = 0;*/
             if(item.text) {
                 item.isEditing = false;
                 item.isHide = false;
@@ -101,7 +126,7 @@
             }else {
                 item.isEditing = false;
                 item.isHide = false;
-                item.text = this.editText;
+                item.text = this.originalText;
                 this.list.$save(item);
             }
 
@@ -111,16 +136,16 @@
         this.clear = function () {
 
             for (var item = 0; item < this.list.length; item++) {
-                if (this.list[item].isCompleted === true) {
-                    this.list[item].isHide = true;
-                    this.list[item].unDoneValue ++;
-                    this.list.$save(item);
+                if(this.list[item].isHide == false && this.list[item].isCompleted === true) {
+                    for (var item = 0; item < this.list.length; item++) {
+                        if (this.list[item].isCompleted === true) {
+                            this.list[item].isHide = true;
+                            this.list[item].unDoneValue++;
+                            this.list.$save(item);
+                        }
+                    }
                 }
-                /*if(this.list[item].unDoneValue === 1){
-                    this.index = item;
-                }*/
             }
-
         };
 
 
@@ -156,7 +181,7 @@
             }*/
 
             for (var i = 0; i < this.list.length; i++) {
-                if (this.list[i].unDoneValue === 1) {
+                if (this.list[i].unDoneValue === (this.unDoneArray[0].unDoneValue + 1)) {
                     this.list[i].isHide = false;
                     this.list[i].unDoneValue = this.unDoneArray[0].unDoneValue;
                     this.list.$save(i);
