@@ -26,6 +26,7 @@
         this.unDoneRecords = new Firebase("https://tdo.firebaseio.com/unDoneRecords");
         // in unDoneRecords object make an array of unDoneValue.
         this.unDoneArray = $firebaseArray(this.unDoneRecords);
+
         /*this.unDoneArray.$add({unDoneValue: 0});*/
 
         // creates an object of name todo_list in the firebase server.
@@ -36,7 +37,10 @@
         this.inc = 0;
 
         // one time one item.
-        /*this.editingItems = 0;*/
+        this.editingItems = 0;
+
+        // run for loop only once counter.
+        this.countFor = 0;
 
         /*this.pageLd = function(){
          if (ref == undefined){
@@ -49,16 +53,21 @@
         this.list = $firebaseArray(this.ref);
 
         // loop that checks the isEditing property and set it to false and shows the list item.
-        this.check = function(){
+        if (this.countFor === 0) {
+            debugger;
             for (var item = 0; item < this.list.length; item++) {
+                console.log('in for loop');
                 if (this.list[item].isEditing == true) {
-                    console.log("is true");
+                    console.log('in if');
                     this.list[item].isEditing = false;
                     this.list[item].isHide = false;
                     this.list.$save(item);
                 }
             }
-        };
+            this.countFor++;
+        }
+
+
 
 
         this.listItem = undefined;
@@ -85,11 +94,13 @@
 
         // editing the particular item on the list
         this.editing = function(item) {
-            this.originalText = item.text;
-            item.isEditing = true;
-            item.isHide = true;
-            this.list.$save(item);
-            /*this.editingItems = 1;*/
+            if(this.editingItems === 0) {
+                this.originalText = item.text;
+                item.isEditing = true;
+                item.isHide = true;
+                this.list.$save(item);
+                this.editingItems = 1;
+            }
 
             /*if(this.editingItems = 1){
                 // to close all open editing items
@@ -118,7 +129,7 @@
 
         // edited the particular item on the list
         this.edited = function(item){
-            /*this.editingItems = 0;*/
+            this.editingItems = 0;
             if(item.text) {
                 item.isEditing = false;
                 item.isHide = false;
@@ -222,8 +233,6 @@
          var fredRef = new Firebase('https://mytdo.firebaseio.com/todo-list');
          fredRef.remove();
          }*/
-
-
 
 
 
