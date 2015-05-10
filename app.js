@@ -26,18 +26,19 @@
         this.unDoneRecords = new Firebase("https://tdo.firebaseio.com/unDoneRecords");
         // in unDoneRecords object make an array of unDoneValue.
         this.unDoneArray = $firebaseArray(this.unDoneRecords);
-
         /*this.unDoneArray.$add({unDoneValue: 0});*/
 
         // creates an object of name todo_list in the firebase server.
         this.ref = new Firebase("https://tdo.firebaseio.com/todo-list");
+        this.onItem = new Firebase("https://tdo.firebaseio.com/onEdit");
 
 
         this.name = "todo-list";
         this.inc = 0;
 
         // one time one item.
-        this.editingItems = 0;
+        this.onEdit = $firebaseArray(this.onItem);
+        /*this.onEdit.$add({editingItems: 0});*/
 
         // run for loop only once counter.
         this.countFor = 0;
@@ -68,14 +69,13 @@
         }
 
 
-
-
         this.listItem = undefined;
         this.editText = undefined;
 
 
         // add text and isCompleted property as an object in the array of list on firebase.
         this.add = function () {
+
 
             if (this.listItem) {
 
@@ -94,12 +94,14 @@
 
         // editing the particular item on the list
         this.editing = function(item) {
-            if(this.editingItems === 0) {
+
+            if(this.onEdit[0].editingItems === 0) {
                 this.originalText = item.text;
                 item.isEditing = true;
                 item.isHide = true;
                 this.list.$save(item);
-                this.editingItems = 1;
+                this.onEdit[0].editingItems = 1;
+                this.onEdit.$save(0);
             }
 
             /*if(this.editingItems = 1){
@@ -129,7 +131,10 @@
 
         // edited the particular item on the list
         this.edited = function(item){
-            this.editingItems = 0;
+
+            this.onEdit[0].editingItems = 0;
+            this.onEdit.$save(0);
+
             if(item.text) {
                 item.isEditing = false;
                 item.isHide = false;
